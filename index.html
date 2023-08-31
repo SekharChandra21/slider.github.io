@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slider</title>
+
+    <!-- <link rel="stylesheet" href="slider.css"> -->
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-image: url('https://static.vecteezy.com/system/resources/thumbnails/008/020/629/small/banner-web-template-abstract-blue-and-golden-curved-lines-overlapping-layer-design-on-dark-blue-background-luxury-style-vector.jpg');
+            /* background-color: black; */
+        }
+
+        .slides {
+            position: relative;
+            /* height: 100vh; */
+            margin: 100px 0px 0px 290px;
+            width: 80vw;
+            height: 70vh;
+
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            display: none;
+            animation: slide 1.5s ease;
+        }
+
+        .slide img {
+            width: 80%;
+            height: 100%;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes slide {
+            0% {
+                opacity: 0;
+                /* transform: scale(1.5); */
+            }
+
+            100% {
+                opacity: 1;
+                /* transform: scale(1); */
+            }
+
+
+        }
+
+        h3 {
+            position: absolute;
+            bottom: 50px;
+            text-align: center;
+            font-size: 25px;
+            left: 50%;
+            color: white;
+            transform: translateX(-50%);
+        }
+
+        .dots li {
+            list-style: none;
+            width: 15px;
+            height: 15px;
+            background: rgb(23, 216, 23);
+            margin: 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: inline-flex;
+
+        }
+
+        .dots {
+            position: absolute;
+            transform: translateX(-50%);
+            left: 50%;
+        }
+
+        .dot {
+            transition: all 0.3s linear;
+        }
+
+        .dot.active {
+            width: 25px;
+        }
+
+        .next,
+        .prev {
+            position: absolute;
+            top: 50%;
+            font-size: 40px;
+            transform: translateY(-50%);
+            padding: 10px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.5s;
+        }
+
+        .next:hover,
+        .prev:hover {
+            background: rgb(18, 18, 18);
+        }
+
+        .next {
+            right: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slides">
+        <div class="slide">
+            <img src="https://img.freepik.com/premium-photo/beautiful-red-rose-flowers-with-drops-after-rain-summer_80942-6152.jpg?w=360" alt="">
+            <h3>Flower</h3>
+        </div>
+        <div class="slide">
+            <img src="https://images.unsplash.com/photo-1589802829985-817e51171b92?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8NXx8fGVufDB8fHx8fA%3D%3D&w=1000&q=80" alt="">
+            <h3>Mountain</h3>
+        </div>
+        <div class="slide">
+            <img src="https://thumbs.dreamstime.com/b/fish-ocean-3018603.jpg" alt="">
+            <h3>Fish</h3>
+        </div>
+        <div class="slide">
+            <img src="https://www.thoughtco.com/thmb/s8_pc4k--Ci2Y-qrQ_R7pnzWDK0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Dragonfly-58d94b2c5f9b584683b7b5d9.jpg" alt="">
+            <h3>Dragon fly</h3>
+        </div>
+
+        <!-- <div class="buttons"> -->
+        <!-- <a class="prev" onclick="plusSlides(-1)" href="#">&#10094;</a> -->
+        <!-- <a class="next" onclick="plusSlides(1)" href="#">&#10095;</a> -->
+        <!-- </div> -->
+
+        <div class="dots">
+            <ul>
+                <li class="dot active" onclick="currentSlide(0)"></li>
+                <li class="dot" onclick="currentSlide(1)"></li>
+                <li class="dot" onclick="currentSlide(2)"></li>
+                <li class="dot" onclick="currentSlide(3)"></li>
+            </ul>
+        </div>
+    </div>
+
+
+    <script>
+        slideIndex = 0;
+        showSlide(slideIndex);
+
+        function showSlide(idx) {
+            console.log(idx);
+
+            slides = document.getElementsByClassName("slide");
+            dots = document.getElementsByClassName("dot");
+
+            if (idx > slides.length - 1) {
+                slideIndex = 0;
+            }
+
+            if (idx < 0) {
+                slideIndex = slides.length - 1;
+            }
+
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('active');
+                dots[i].classList.remove('active');
+            }
+
+            slides[slideIndex].classList.add('active');
+            dots[slideIndex].classList.add('active');
+        }
+
+        function plusSlides(idx) {
+            slideIndex += idx;
+            showSlide(slideIndex);
+        }
+
+        function currentSlide(n) {
+            slideIndex = n;
+            showSlide(slideIndex);
+        }
+
+        autoSlide();
+
+        function autoSlide() {
+            console.log(slideIndex);
+
+            slides = document.getElementsByClassName("slide");
+            dots = document.getElementsByClassName("dot");
+
+            if (slideIndex > slides.length - 1) {
+                slideIndex = 0;
+            }
+
+            if (slideIndex < 0) {
+                slideIndex = slides.length - 1;
+            }
+
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].classList.remove('active');
+                dots[i].classList.remove('active');
+            }
+
+            slides[slideIndex].classList.add('active');
+            dots[slideIndex].classList.add('active');
+            slideIndex++;
+
+            setTimeout(autoSlide, 3000);
+        }
+    </script>
+    <!-- <script src="slider.js"></script> -->
+</body>
+
+</html>
